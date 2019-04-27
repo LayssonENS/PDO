@@ -10,7 +10,17 @@
     <?php
         require './Usuario.php';
         $usuario = new Usuario();
-        echo $usuario->getDadosUser("Teste, teste@teste")
-    ?>
+        $usuario->setNome("Teste");
+        $usuario->setEmail("teste@teste");
+        $usuario->setProva("10");
+        $usuario->setTrabalho("7");
+
+        echo $usuario->getNome();
+        echo $usuario->getEmail();
+        echo $usuario->getProva() +  $usuario->getTrabalho();
+
+
+
+?>
 </body>
 </html>
