@@ -1,6 +1,4 @@
-<?php
-include 'CadastrarUsuario.php';
-?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -10,7 +8,7 @@ include 'CadastrarUsuario.php';
     <body>
 
         <h1>Cadastrar</h1>
-        <form name ="CadUsuario" action="/CadastrarUsuario.php" method = "POST">
+        <form name ="CadUsuario" action="Aula9-CRUD/CadastrarUsuario.php" method = "POST">
         <label>Nome: </label>
         <input type="text" name="nome" placeholder="Nome completo"><br><br>
 
@@ -27,5 +25,8 @@ include 'CadastrarUsuario.php';
 
 
         </form>
+
+        <a href="Aula9-CRUD/ConsultarUsuario.php"> <button>Veja cadastrados</button> </a>
+
     </body>
 </html>
