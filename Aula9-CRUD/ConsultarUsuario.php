@@ -25,6 +25,7 @@ while ($row_user = $resultado_user->fetch(PDO::FETCH_ASSOC)):
     if (!empty($row_user['modified'])):
         echo "Alterado: " . date('d/m/Y H:i:s', strtotime($row_user['modified'])) . "<br>";
     endif;
+    echo "<a href='VisualizarUsuario.php?id=".$row_user['id']."'>Visualizar</a>";
     echo "<hr>";
 
 endwhile;
