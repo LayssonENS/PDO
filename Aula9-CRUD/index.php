@@ -1,32 +1,43 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>Cadastrar Usuario</title>
+        <title>Celke</title>
     </head>
     <body>
+        <h1>Listar usuário</h1>
+        <a href="cadastrar.php">Cadastrar</a><br><br>
+        <?php
+        if (isset($_SESSION['msg'])) :
+            echo $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        endif;
+        
+        require './Conn.php';
 
-        <h1>Cadastrar</h1>
-        <form name ="CadUsuario" action="Aula9-CRUD/CadastrarUsuario.php" method = "POST">
-        <label>Nome: </label>
-        <input type="text" name="nome" placeholder="Nome completo"><br><br>
+        $conn = new Conn();
+        $result_user = "SELECT * FROM usuarios";
 
-        <label>Email: </label>
-        <input type="email" name="email" placeholder="Email"><br><br>
+        $resultado_user = $conn->getConn()->prepare($result_user);
+        $resultado_user->execute();
 
-        <label>Usuario: </label>
-        <input type="text" name="usuario" placeholder="Usuario para acessar"><br><br>
-
-        <label>Senha: </label>
-        <input type="password" name="senha" placeholder="Senha para entrar"><br><br>
-
-        <input type="submit" value="Cadastrar" name="SendCadUser">
-
-
-        </form>
-
-        <a href="Aula9-CRUD/ConsultarUsuario.php"> <button>Veja cadastrados</button> </a>
-
+        while ($row_user = $resultado_user->fetch(PDO::FETCH_ASSOC)):
+            echo "ID: " . $row_user['id'] . "<br>";
+            echo "Nome: " . $row_user['nome'] . "<br>";
+            echo "E-mail: " . $row_user['email'] . "<br>";
+            echo "Usuário: " . $row_user['usuario'] . "<br>";
+            echo "Inserido: " . date('d/m/Y H:i:s', strtotime($row_user['created'])) . "<br>";
+            if (!empty($row_user['modified'])):
+                echo "Alterado: " . date('d/m/Y H:i:s', strtotime($row_user['modified'])) . "<br>";
+            endif;
+            echo "<a href='visualizar.php?id=" . $row_user['id'] . "'>Visualizar</a><br>";
+            echo "<a href='editar.php?id=" . $row_user['id'] . "'>Editar</a><br>";
+            echo "<a href='apagar.php?id=" . $row_user['id'] . "'>Apagar</a><br>";
+            echo "<hr>";
+        endwhile;
+        ?>
     </body>
 </html>
