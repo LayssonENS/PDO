@@ -29,12 +29,14 @@ session_start();
 
             $resultado_up_user->execute();
 
-            if ($resultado_up_user->execute()):
-                $_SESSION['msg'] = "<p style='color:green;'>Registro editado com sucesso</p>";
-                header("Location: index.php");
-            else:
-                echo "<p style='color:red;'>Registro não foi editado</p>";
-            endif;
+            try {
+    //....
+    $resultado_up_user->execute();
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
+
+        
         endif;
 
 
